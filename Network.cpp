@@ -10,7 +10,7 @@ using namespace std;
 //using namespace arma;
 
 //   compile
-// g++ Network.cpp -o Network -DARMA_USE_WRAPPER -lopenblas -llapack -L/usr/lib/x86_64-linux-gnu/hdf5/serial -lhdf5
+//g++ Network.cpp -o Network -DARMA_USE_WRAPPER -lopenblas -llapack -L/usr/lib/x86_64-linux-gnu/hdf5/serial -lhdf5 -lGL -lGLU -lglut
 // execute
 // ./Network
 
@@ -87,46 +87,46 @@ int main(int argc, char**argv){
 //	for(int j=0;j<10;j++){
 //		cout<<endl<<RAND_MAX;
 //		}
-
+	//GLfloat repulsive_force_index;
+	GLint repulsive_force_index;
 	cout<<endl<<"no_of_lobes "<<no_of_lobes;
 	for(int i=0;i<no_of_lobes;i++){
 	  for(int j=0;j<no_of_lobes;j++){
 	   //cout<<endl<<"****"<<i<<j;
-	   if(i!=j){//n*3 will be lobes index
-	     for(int k=0;k<(ij_edges_len_and_repulsion)/3;k++){//finding repulsion force index for current i and j
-		if(i==repulsive_force[(k*3)+1] && j==repulsive_force[(k*3)+2]
-		      || j==repulsive_force[(k*3)+1] && i==repulsive_force[(k*3)+2]){
-			GLfloat repulsive_force_index=k*3;
+	   	if(i!=j){//n*3 will be lobes index
+			for(int k=0;k<(ij_edges_len_and_repulsion)/3;k++){//finding repulsion force index for current i and j
+				if(i==repulsive_force[(k*3)+1] && j==repulsive_force[(k*3)+2]
+					 || j==repulsive_force[(k*3)+1] && i==repulsive_force[(k*3)+2])
+						repulsive_force_index=k*3;
 			}
-		}
 
-	     for(int k=0;k<(ij_edges_len_and_repulsion)/3;k++){
-		if(i!=repulsive_force[(k*3)+1] && j==repulsive_force[(k*3)+2]//comparing force between node j and all other nodes
-		      || j==repulsive_force[(k*3)+1] && i!=repulsive_force[(k*3)+2]){
-			while(repulsive_force[repulsive_force_index]>repulsive_force[k*3]){
-//			    int prev_repulsion2=;
-//			    int prev_repulsion1;
-//			    if((prev_repulsion2-prev_repulsion1)>(prev_repulsion1-repulsive_force[k*3])){
-//				t=-(t-something);}
-//			    else{t=-(t+something);}
-			    //t=repulsive_force[repulsive_force_index]-repulsive_force[k*3];
-//GLfloat parallel_vector[3]={lobes[i*3]-lobes[j*3],lobes[(i*3)+1]-lobes[(j*3)+1],lobes[(i*3)+2]-lobes[(j*3)+2]};//j to i
-			    GLfloat parallel_vector[3]={lobes[i*3]-lobes[j*3],lobes[(i*3)+1]-lobes[(j*3)+1],lobes[(i*3)+2]-lobes[(j*3)+2]};//j to i
-			    
-	     		    lobes[j*3]=lobes[j*3]+(parallel_vector[0]*t);
-	     		    lobes[(j*3)+1]=lobes[(j*3)+1]+(parallel_vector[1]*t);
-	     		    lobes[(j*3)+2]=lobes[(j*3)+2]+(parallel_vector[2]*t);
-	     		    cout<<endl<<"#####"<<i<<j;
-	     		    vectorLength[repulsive_force_index]=sqrt(pow(lobes[i]-lobes[j],2)+pow(lobes[i+1]-lobes[j+1],2)+pow(lobes[i+2]-lobes[j+2],2));
-			    repulsive_force[repulsive_force_index]=6647/pow(vectorLength[repulsive_force_index],2);
+			for(int k=0;k<(ij_edges_len_and_repulsion)/3;k++){
+				if(i!=repulsive_force[(k*3)+1] && j==repulsive_force[(k*3)+2]//comparing force between node j and all other nodes
+					 || j==repulsive_force[(k*3)+1] && i!=repulsive_force[(k*3)+2]){
+					while(repulsive_force[repulsive_force_index]>repulsive_force[k*3]){
+						//int prev_repulsion2=;
+						//int prev_repulsion1;
+						//if((prev_repulsion2-prev_repulsion1)>(prev_repulsion1-repulsive_force[k*3])){
+						//t=-(t-something);}
+						//else{t=-(t+something);}
+						//t=repulsive_force[repulsive_force_index]-repulsive_force[k*3];
+						//GLfloat parallel_vector[3]={lobes[i*3]-lobes[j*3],lobes[(i*3)+1]-lobes[(j*3)+1],lobes[(i*3)+2]-lobes[(j*3)+2]};//j to i
+						GLfloat parallel_vector[3]={lobes[i*3]-lobes[j*3],lobes[(i*3)+1]-lobes[(j*3)+1],lobes[(i*3)+2]-lobes[(j*3)+2]};//j to i
+
+						lobes[j*3]=lobes[j*3]+(parallel_vector[0]*t);
+						lobes[(j*3)+1]=lobes[(j*3)+1]+(parallel_vector[1]*t);
+						lobes[(j*3)+2]=lobes[(j*3)+2]+(parallel_vector[2]*t);
+						cout<<endl<<"#####"<<i<<j;
+						vectorLength[repulsive_force_index]=sqrt(pow(lobes[i]-lobes[j],2)+pow(lobes[i+1]-lobes[j+1],2)+pow(lobes[i+2]-lobes[j+2],2));
+						repulsive_force[repulsive_force_index]=6647/pow(vectorLength[repulsive_force_index],2);
+					}
 				}
 			}
-		}
-	     //vectorLength=sqrt(pow(lobes[i]-lobes[j],2)+pow(lobes[i+1]-lobes[j+1],2)+pow(lobes[i+2]-lobes[j+2],2));
-	     //repulsive_force=6647/pow(vectorLength,2);
+			//vectorLength=sqrt(pow(lobes[i]-lobes[j],2)+pow(lobes[i+1]-lobes[j+1],2)+pow(lobes[i+2]-lobes[j+2],2));
+			//repulsive_force=6647/pow(vectorLength,2);
 	     }
 	    }
-	   }
+	}
 
 //	glutInit(&argc,argv);
 //	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
