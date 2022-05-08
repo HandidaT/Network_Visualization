@@ -37,18 +37,7 @@ void init(){
 }
 
 int main(int argc, char**argv){
-	int a[] = {3,6,8,33};
-	int x=33;
-	int index=find(a,a+4,x)-a;
-	bool exists = find(begin(a),end(a),x) !=end(a);
-	cout<<"###"<<index<<"###"<<find(begin(a),end(a),x)<<"######"<<exists<<"########";
-
-	// int no_of_lobes;
-	// cout<<"Enter number of lobes: ";
-	// cin>>no_of_lobes;
-	// int lobe_list_len=no_of_lobes*3;//Each lobe position has 3 dimensional coordinates x,y,z
 	cout<<" lobe_list_len "<<lobe_list_len;
-	// GLfloat lobes[lobe_list_len];
 	srand(time(0));
 	int counter=0;
 	int ij_edges_len_and_repulsion= 3*( (no_of_lobes*(no_of_lobes-1)) /2 ); //Arithmetic series, array len 
@@ -71,91 +60,6 @@ int main(int argc, char**argv){
 		}
 
 
-	/*	int index=0;
-//	for(int i=0;i<ij_edges_len_and_repulsion;i+=3){// Initializing edges with random repulsion and length values
-	for(int j=0;j<no_of_lobes;j++){
-		if(j==no_of_lobes){break;}
-		for(int k=j+1;k<no_of_lobes;k++){
-			vectorLength[index]=(static_cast <GLfloat> (rand())) / (static_cast <GLfloat> (RAND_MAX/radius));
-			vectorLength[index+1]=j;
-			vectorLength[index+2]=k;
-
-			repulsive_force[index]=6647/pow(vectorLength[index],2);
-			repulsive_force[index+1]=j;
-			repulsive_force[index+2]=k;
-
-			cout<<endl<<endl<<vectorLength[index]<<" "<<vectorLength[index+1]<<" "<<vectorLength[index+2];
-			cout<<endl<<repulsive_force[index]<<" "<<repulsive_force[index+1]<<" "<<repulsive_force[index+2];
-			index+=3;
-			}
-	}
-
-	cout<<endl<<"ij_edges_len_and_repulsion "<<ij_edges_len_and_repulsion<<endl<<"index "<<index;
-
-
-//	for(int j=0;j<10;j++){
-//		cout<<endl<<RAND_MAX;
-//		}
-
-	cout<<endl<<"no_of_lobes "<<no_of_lobes;
-	int repulsive_force_index;
-	for(int i=0;i<no_of_lobes;i++){
-	  for(int j=0;j<no_of_lobes;j++){
-	   //cout<<endl<<"****"<<i<<j;
-	   if(i!=j){//n*3 will be lobes index
-	     for(int k=0;k<(ij_edges_len_and_repulsion)/3;k++){//finding repulsion force index for current i and j
-		if(i==repulsive_force[(k*3)+1] && j==repulsive_force[(k*3)+2]
-		      || j==repulsive_force[(k*3)+1] && i==repulsive_force[(k*3)+2]){
-			repulsive_force_index=k*3;
-			}
-		}
-
-	     for(int k=0;k<(ij_edges_len_and_repulsion)/3;k++){
-		if(i!=repulsive_force[(k*3)+1] && j==repulsive_force[(k*3)+2]//comparing force between node j and all other nodes
-		      || j==repulsive_force[(k*3)+1] && i!=repulsive_force[(k*3)+2]){
-			while(repulsive_force[repulsive_force_index]>repulsive_force[k*3]){
-//			    int prev_repulsion2=;
-//			    int prev_repulsion1;
-//			    if((prev_repulsion2-prev_repulsion1)>(prev_repulsion1-repulsive_force[k*3])){
-//				t=-(t-something);}
-//			    else{t=-(t+something);}
-			    //t=repulsive_force[repulsive_force_index]-repulsive_force[k*3];
-//GLfloat parallel_vector[3]={lobes[i*3]-lobes[j*3],lobes[(i*3)+1]-lobes[(j*3)+1],lobes[(i*3)+2]-lobes[(j*3)+2]};//j to i
-			    GLfloat parallel_vector[3]={lobes[i*3]-lobes[j*3],lobes[(i*3)+1]-lobes[(j*3)+1],lobes[(i*3)+2]-lobes[(j*3)+2]};//j to i
-			    
-	     		    lobes[j*3]=lobes[j*3]+(parallel_vector[0]*t);
-	     		    lobes[(j*3)+1]=lobes[(j*3)+1]+(parallel_vector[1]*t);
-	     		    lobes[(j*3)+2]=lobes[(j*3)+2]+(parallel_vector[2]*t);
-	     		    cout<<endl<<"#####"<<i<<j;
-	     		    vectorLength[repulsive_force_index]=sqrt(pow(lobes[i]-lobes[j],2)+pow(lobes[i+1]-lobes[j+1],2)+pow(lobes[i+2]-lobes[j+2],2));
-			    repulsive_force[repulsive_force_index]=6647/pow(vectorLength[repulsive_force_index],2);
-				}
-			}
-		}
-	     //vectorLength=sqrt(pow(lobes[i]-lobes[j],2)+pow(lobes[i+1]-lobes[j+1],2)+pow(lobes[i+2]-lobes[j+2],2));
-	     //repulsive_force=6647/pow(vectorLength,2);
-	     }
-	    }
-	   }
-*/
-
-
-//	for(int i=0;i<lobe_list_len;i+=3){
-//		GLfloat xtemp=0.0;
-//		GLfloat ytemp=0.0;
-//		//GLfloat ztemp=0.0;
-//		cout<<i<<" "<<lobes[i]<<" "<<lobes[i+1]<<" "<<lobes[i+2]<<endl;
-//		for(int j=0;j<lobe_list_len;j+=3){
-//			xtemp += lobes[j];
-//			ytemp += lobes[j+1];
-//			//ztemp += lobes[j+2];
-//			cout<<"###"<<xtemp<<" "<<ytemp<<" "<<endl;//<<ztemp<<endl;
-//		}
-//		lobes[i]=-xtemp;
-//		lobes[i+1]=-ytemp;
-//		//lobes[i+2]=ztemp;
-//		cout<<i<<" "<<lobes[i]<<" "<<lobes[i+1]<<" "<<lobes[i+2]<<endl;
-//	}
 	glutInit(&argc,argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
 	glutInitWindowPosition(500,200);
